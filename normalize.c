@@ -185,33 +185,3 @@ int main() {
     
     return 0;
 }
-    
-#!/bin/bash
-echo "Executando testes de desempenho para diferentes otimizações..."
-# Compilar o programa
-gcc -o normalize normalize.c -lm -lrt -O2
-# Executar o programa e salvar saída em 
-output.txt./normalize > output.txt
-echo "Resultados salvos em output.txt"
-
-
-esse script facilita a execução dos testes de desempenho.
-Ele compila o código e executa o programa, redirecionando a saída para um arquivo output.txt
-Instruções para Compilação e Execução
-Coloque todos os arquivos no mesmo diretório:
-normalize.c (o código fonte)run_tests.sh (script de execução)data.csv (arquivo CSV com dados de entrada)
-Para compilar e rodar o programa, execute os comandos:
-bash Copiar 
-códigochmod +x run_tests.sh 
-# Para tornar o script executável./run_tests.sh         
-# Executa o script para compilar e rodar o programa
-Os resultados serão salvos no arquivo output.txt.
-
-Entregáveis
-Código Fonte:
-Código fonte incluindo as três versões otimizadas do método normalize_feature_vector.
-Código para leitura dos dados do arquivo CSV.
-Exemplo de como compilar e executar o trabalho.
-Scripts de teste utilizados para medir o desempenho.
-Os fontes, bem como demais arquivos necessários para compilação e execução, bem como um arquivo de entrada de exemplo, deverão ser enviados num arquivo compactado único no link do trabalho no canvas.
-OBSERVAÇÃO: O código deve ser compatível com arquitetura GNU/Linux. Trabalhos compatíveis apenas com outros sitemas operacionais NÃO serão avaliados

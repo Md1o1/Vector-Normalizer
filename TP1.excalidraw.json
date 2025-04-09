@@ -5,8 +5,8 @@
   "elements": [
     {
       "type": "text",
-      "version": 681,
-      "versionNonce": 456748540,
+      "version": 682,
+      "versionNonce": 891760251,
       "isDeleted": false,
       "id": "Rp_HuDFktN9-oi8X3SmHQ",
       "fillStyle": "solid",
@@ -26,7 +26,7 @@
       "frameId": "OB54jRy5ogYnIaaJE93NI",
       "roundness": null,
       "boundElements": [],
-      "updated": 1727297191344,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -37,12 +37,14 @@
       "containerId": null,
       "originalText": "#include <stdio.h>\nint main() {\n    double x = 3.1415926535;\n    double y, z;\n    unsigned long int x0, y0, k;\n    unsigned long long int xi, yi;\n    static int T2[64]= {\n    0x1500, 0x2ef8, 0x4d67, 0x6b02, 0x87be, 0xa395, 0xbe7a, 0xd866,\n    0xf14a, 0x1091b,0x11fcd,0x13552,0x14999,0x15c98,0x16e34,0x17e5f,\n    0x18d03,0x19a01,0x1a545,0x1ae8a,0x1b5c4,0x1bb01,0x1bfde,0x1c28d,\n    0x1c2de,0x1c0db,0x1ba73,0x1b11c,0x1a4b5,0x1953d,0x18266,0x16be0,\n    0x1683e,0x179d8,0x18a4d,0x19992,0x1a789,0x1b445,0x1bf61,0x1c989,\n    0x1d16d,0x1d77b,0x1dddf,0x1e2ad,0x1e5bf,0x1e6e8,0x1e654,0x1e3cd,\n    0x1df2a,0x1d635,0x1cb16,0x1be2c,0x1ae4e,0x19bde,0x1868e,0x16e2e,\n    0x1527f,0x1334a,0x11051,0xe951, 0xbe01, 0x8e0d, 0x5924, 0x1edd };\n    /* Convert double to unsigned long long (64 bits wide)  */\n    xi = *(unsigned long long int*)&x;\n    /* Extract only the first half of the bits of the integer */\n    x0 = (xi & 0xffffffff00000000) >> 32;\n    /* Perform bit shift and subtract from an integer constant to get k */\n    k = 0x5fe80000 - (x0 >> 1);\n    /* T2 is indexed by mostly by exponent bits. \n       Only 5 highest bits from orig 52 in mantissa are used to index T2 */\n    y0 = k - T2[63 & (k >> 14)];\n    /* Pad with zeros for the LS 32 bits, convert back to long long */\n    yi = ((unsigned long long int) y0 << 32);\n    /* Get double from bits making up unsigned long long */ \n    y = *(double*)&yi;\n    /* 1/sqrt(pi) ~ 0.564 */\n    printf(\"%lf\\n\", y);\n    return 0;\n}",
       "lineHeight": 1.2,
-      "baseline": 610
+      "baseline": 610,
+      "index": "a0",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 746,
-      "versionNonce": 1641643972,
+      "version": 747,
+      "versionNonce": 1996835509,
       "isDeleted": false,
       "id": "TZdKt_HQUlvAYXT_3J-gy",
       "fillStyle": "solid",
@@ -62,7 +64,7 @@
       "frameId": "Kpm-ceEsUxgbp3j5aizCJ",
       "roundness": null,
       "boundElements": [],
-      "updated": 1727297191345,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -73,12 +75,14 @@
       "containerId": null,
       "originalText": "float Q_rsqrt( float number )\n{\n    long i;\n    float x2, y;\n    const float threehalfs = 1.5F;\n\n    x2 = number * 0.5F;\n    y  = number;\n    i  = * ( long * ) &y;                       // evil floating point bit level hacking\n    i  = 0x5f3759df - ( i >> 1 );               // what the fuck? \n    y  = * ( float * ) &i;\n    y  = y * ( threehalfs - ( x2 * y * y ) );   // 1st iteration\n//  y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed\n\n    return y;\n}",
       "lineHeight": 1.2,
-      "baseline": 303
+      "baseline": 303,
+      "index": "a1",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 547,
-      "versionNonce": 1649561212,
+      "version": 548,
+      "versionNonce": 1590798107,
       "isDeleted": false,
       "id": "CkFZcHNCkoiOyoVUEnrcz",
       "fillStyle": "solid",
@@ -98,7 +102,7 @@
       "frameId": "r_zA_Kjhjl1rAKQgyQm61",
       "roundness": null,
       "boundElements": [],
-      "updated": 1727297191352,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -109,12 +113,14 @@
       "containerId": null,
       "originalText": "#include <stdio.h>\n#include <string.h>\n#include <math.h>\n#include <stdlib.h>\n#include <sys/resource.h>\n#define _GNU_SOURCE\n\n// Função naïve para normalizar um vetor de características\nvoid normalize_feature_vector(float* features, int length) {\n    float sum = 0.0f;\n    for (int i = 0; i < length; i++) {\n        sum += features[i] * features[i];\n    }\n    float inv_sqrt = 1.0f / sqrt(sum);\n\n    for (int i = 0; i < length; i++) {\n        features[i] *= inv_sqrt;\n    }\n}\n\n// Função para ler dados de um arquivo CSV\nfloat** read_csv(const char* filename, int* num_elements, int* num_dimensions) {\n    FILE* file = fopen(filename, \"r\");\n    if (!file) {\n        perror(\"Failed to open file\");\n        exit(EXIT_FAILURE);\n    }\n\n    // Determine the number of elements and dimensions\n    *num_elements = 0;\n    *num_dimensions = 0;\n    char line[1024];\n    while (fgets(line, sizeof(line), file)) {\n        if (*num_elements == 0) {\n            char* token = strtok(line, \",\");\n            while (token) {\n                (*num_dimensions)++;\n                token = strtok(NULL, \",\");\n            }\n        }\n        (*num_elements)++;\n    }\n    rewind(file);\n\n    // Allocate memory for the features\n    float** features = (float**)malloc(*num_elements * sizeof(float*));\n    for (int i = 0; i < *num_elements; i++) {\n        features[i] = (float*)malloc(*num_dimensions * sizeof(float));\n    }\n\n    // Read the data\n    int i = 0;\n    while (fgets(line, sizeof(line), file)) {\n        int j = 0;\n        char* token = strtok(line, \",\");\n        while (token) {\n            features[i][j++] = atof(token);\n            token = strtok(NULL, \",\");\n        }\n        i++;\n    }\n\n    fclose(file);\n    return features;\n}\n\n// Função para medir o tempo de execução usando a biblioteca 'resources'\nvoid get_resource_usage(struct rusage* usage) {\n    getrusage(RUSAGE_SELF, usage);\n}\n\nvoid print_resource_usage(const char* label, struct rusage* usage) {\n    printf(\"%s\\n\", label);\n    printf(\"User time: %ld.%06ld seconds\\n\", usage->ru_utime.tv_sec, usage->ru_utime.tv_usec);\n    printf(\"System time: %ld.%06ld seconds\\n\", usage->ru_stime.tv_sec, usage->ru_stime.tv_usec);\n    printf(\"Maximum resident set size: %ld kilobytes\\n\", usage->ru_maxrss);\n}\n\n",
       "lineHeight": 1.2,
-      "baseline": 1513
+      "baseline": 1513,
+      "index": "a2",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 460,
-      "versionNonce": 1570563908,
+      "version": 461,
+      "versionNonce": 1842621461,
       "isDeleted": false,
       "id": "DOU0upp884zS_n_xFaRuj",
       "fillStyle": "solid",
@@ -134,7 +140,7 @@
       "frameId": "r_zA_Kjhjl1rAKQgyQm61",
       "roundness": null,
       "boundElements": [],
-      "updated": 1727297191354,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
       "fontSize": 16,
@@ -145,12 +151,14 @@
       "containerId": null,
       "originalText": "int main() {\n    int num_elements, num_dimensions;\n    float** features = read_csv(\"data.csv\", &num_elements, &num_dimensions);\n\n    struct rusage start_usage, end_usage;\n    \n    get_resource_usage(&start_usage);\n    for (int i = 0; i < num_elements; i++) {\n        normalize_feature_vector(features[i], num_dimensions);\n    }\n    get_resource_usage(&end_usage);\n\n    printf(\"Normalized features:\\n\");\n    for (int i = 0; i < num_elements; i++) {\n        for (int j = 0; j < num_dimensions; j++) {\n            printf(\"%f \", features[i][j]);\n        }\n        printf(\"\\n\");\n    }\n\n    printf(\"Execution time and resource usage:\\n\");\n    print_resource_usage(\"Start Usage\", &start_usage);\n    print_resource_usage(\"End Usage\", &end_usage);\n\n    // Free allocated memory\n    for (int i = 0; i < num_elements; i++) {\n        free(features[i]);\n    }\n    free(features);\n\n    return 0;\n}",
       "lineHeight": 1.2,
-      "baseline": 610
+      "baseline": 610,
+      "index": "a3",
+      "autoResize": true
     },
     {
       "type": "text",
-      "version": 334,
-      "versionNonce": 75177724,
+      "version": 335,
+      "versionNonce": 702811067,
       "isDeleted": false,
       "id": "h3JUXQKvxMeiejj4qWVsK",
       "fillStyle": "solid",
@@ -170,7 +178,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1727297191359,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
       "fontSize": 138.400146484375,
@@ -181,12 +189,14 @@
       "containerId": null,
       "originalText": "Trabalho Prático 1",
       "lineHeight": 1.25,
-      "baseline": 122
+      "baseline": 122,
+      "index": "a4",
+      "autoResize": true
     },
     {
       "type": "frame",
-      "version": 200,
-      "versionNonce": 872808961,
+      "version": 201,
+      "versionNonce": 1593827701,
       "isDeleted": false,
       "id": "r_zA_Kjhjl1rAKQgyQm61",
       "fillStyle": "solid",
@@ -206,15 +216,16 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1726684519091,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
-      "name": "Código fornecido pelo Professor"
+      "name": "Código fornecido pelo Professor",
+      "index": "a5"
     },
     {
       "type": "frame",
-      "version": 367,
-      "versionNonce": 2027149967,
+      "version": 368,
+      "versionNonce": 2055265371,
       "isDeleted": false,
       "id": "OB54jRy5ogYnIaaJE93NI",
       "fillStyle": "solid",
@@ -234,15 +245,16 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1726684519091,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
-      "name": "exemplo aplicação - stack overflow"
+      "name": "exemplo aplicação - stack overflow",
+      "index": "a6"
     },
     {
       "type": "frame",
-      "version": 251,
-      "versionNonce": 316152289,
+      "version": 252,
+      "versionNonce": 265153237,
       "isDeleted": false,
       "id": "Kpm-ceEsUxgbp3j5aizCJ",
       "fillStyle": "solid",
@@ -262,15 +274,16 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1726684519091,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
-      "name": "algoritmo de otimização"
+      "name": "algoritmo de otimização",
+      "index": "a7"
     },
     {
       "type": "text",
-      "version": 216,
-      "versionNonce": 1804033732,
+      "version": 217,
+      "versionNonce": 209361147,
       "isDeleted": false,
       "id": "nmL4Kpq8OTNUi3x-Pg40_",
       "fillStyle": "solid",
@@ -290,7 +303,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1727297191361,
+      "updated": 1744203267430,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -301,12 +314,14 @@
       "containerId": null,
       "originalText": "Padrão de entrega Abakós:\n",
       "lineHeight": 1.25,
-      "baseline": 43
+      "baseline": 43,
+      "index": "a8",
+      "autoResize": true
     },
     {
       "type": "embeddable",
-      "version": 186,
-      "versionNonce": 1315863932,
+      "version": 187,
+      "versionNonce": 13879349,
       "isDeleted": false,
       "id": "hJQQ7o3x6DtMU4jCyEyE_",
       "fillStyle": "solid",
@@ -328,15 +343,18 @@
         "type": 3
       },
       "boundElements": [],
-      "updated": 1727297191299,
+      "updated": 1744203267430,
       "link": "https://periodicos.pucminas.br/index.php/abakos/about/submissions",
       "locked": false,
-      "validated": false
+      "validated": false,
+      "index": "a9"
     }
   ],
   "appState": {
-    "gridSize": null,
-    "viewBackgroundColor": "#ffffff"
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
+    "viewBackgroundColor": "#fffce8"
   },
   "files": {}
 }
